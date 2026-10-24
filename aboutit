@@ -1,0 +1,33 @@
+Here’s what the You Aspirant website includes:
+Public website
+- Responsive pages for mobile, tablet, and desktop
+- Career guidance and training information
+- Student stories and testimonials, including YouTube video testimonials
+- Blog previews and published articles
+- Sticky enquiry and WhatsApp buttons
+- Contact form for new student enquiries
+Student features
+- Create an account, sign in, and sign out
+- View enquiries and replies from the You Aspirant team
+- See which expert is assigned to an enquiry
+- Reply to the team from the account page
+- Check counselling request status
+- Take a career assessment quiz
+- Request an available counselling slot
+Admin panel
+- Sign in at /admin/login
+- View and filter the enquiry inbox
+- Open student conversations, reply, and assign experts
+- Mark enquiries contacted, reopen them, or delete them
+- Add experts and their specialties
+- Publish counselling availability and manage booking requests
+- Add or hide video testimonials
+- See enquiry notifications; the dashboard refreshes its count every 15 seconds
+Blog and SEO tools
+- Create, edit, draft, and publish blog articles
+- Set each article’s slug, SEO title, description, keywords, and search visibility
+- Set default site title, description, keywords, and robots directive
+- Add Google Search Console verification and a Google Analytics measurement ID
+- Add trusted tracking or ad snippets in the page head or body
+- Generate sitemap.xml and robots.txt automatically
+- Use clean URLs such as /account, /quiz, and /blog without .php

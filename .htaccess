@@ -1,0 +1,40 @@
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Keep private application files and setup tools inaccessible over HTTP.
+    RewriteRule ^(?:includes|database|\.git)(?:/|$) - [F,L,NC]
+    RewriteRule ^(?:config\.php|config\.example\.php|create_admin\.php|router\.php|\.env(?:\..*)?)$ - [F,L,NC]
+
+    # Use clean public URLs and keep the generated SEO endpoints available.
+    RewriteRule ^sitemap\.xml$ sitemap.php [L]
+    RewriteRule ^robots\.txt$ robots.php [L]
+
+    RewriteCond %{THE_REQUEST} \s/+index\.php(?:[?\s]) [NC]
+    RewriteRule ^index\.php$ / [R=308,L,NE]
+    RewriteCond %{THE_REQUEST} \s/+admin/index\.php(?:[?\s]) [NC]
+    RewriteRule ^admin/index\.php$ /admin/ [R=308,L,NE]
+    RewriteCond %{THE_REQUEST} \s/+[^\s?]+\.php(?:[?\s]) [NC]
+    RewriteRule ^(.+)\.php$ /$1 [R=308,L,NE]
+    RewriteRule ^admin$ /admin/ [R=308,L,NE]
+
+    # Serve extensionless routes from their matching PHP files.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.+)$ $1.php [END,QSA]
+</IfModule>
+
+<IfModule mod_authz_core.c>
+    <FilesMatch "^(?:config\.php|config\.example\.php|create_admin\.php|router\.php|bootstrap\.php|schema\.sql|\.env.*|\.gitignore)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+    <FilesMatch "^(?:config\.php|config\.example\.php|create_admin\.php|router\.php|bootstrap\.php|schema\.sql|\.env.*|\.gitignore)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
